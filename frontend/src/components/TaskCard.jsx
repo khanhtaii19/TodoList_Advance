@@ -14,11 +14,11 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
   const deleteTask = async (taskId) => {
     try {
       await api.delete(`/tasks/${taskId}`);
-      toast.success("Nhiệm vụ đã xoá.");
+      toast.success("Task has been deleted.");
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi xoá task.", error);
-      toast.error("Lỗi xảy ra khi xoá nhiệm vụ mới.");
+      console.error("Error occurred while deleting task.", error);
+      toast.error("Error occurred while deleting new task.");
     }
   };
 
@@ -28,11 +28,11 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
       await api.put(`/tasks/${task._id}`, {
         title: updateTaskTitle,
       });
-      toast.success(`Nhiệm vụ đã đổi thành ${updateTaskTitle}`);
+      toast.success(`Task has been changed to ${updateTaskTitle}`);
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi update task.", error);
-      toast.error("Lỗi xảy ra khi cập nhập nhiệm vụ.");
+      console.error("Error occurred while update task.", error);
+      toast.error("Error occurred while updating task.");
     }
   };
 
@@ -44,19 +44,19 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
           completedAt: new Date().toISOString(),
         });
 
-        toast.success(`${task.title} đã hoàn thành.`);
+        toast.success(`${task.title} has been completed.`);
       } else {
         await api.put(`/tasks/${task._id}`, {
           status: "active",
           completedAt: null,
         });
-        toast.success(`${task.title} đã đổi sang chưa hoàn thành.`);
+        toast.success(`${task.title} has been changed to incomplete.`);
       }
 
       handleTaskChanged();
     } catch (error) {
-      console.error("Lỗi xảy ra khi update task.", error);
-      toast.error("Lỗi xảy ra khi cập nhập nhiệm vụ.");
+      console.error("Error occurred while update task.", error);
+      toast.error("Error occurred while updating task.");
     }
   };
 
@@ -98,7 +98,7 @@ const TaskCard = ({ task, index, handleTaskChanged }) => {
         <div className="flex-1 min-w-0">
           {isEditting ? (
             <Input
-              placeholder="Cần phải làm gì?"
+              placeholder="What needs to be done?"
               className="flex-1 h-12 text-base border-border/50 focus:border-primary/50 focus:ring-primary/20"
               type="text"
               value={updateTaskTitle}

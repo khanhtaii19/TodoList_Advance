@@ -12,16 +12,16 @@ const AddTask = ({ handleNewTaskAdded }) => {
     if (newTaskTitle.trim()) {
       try {
         await api.post("/tasks", { title: newTaskTitle });
-        toast.success(`Nhiệm vụ ${newTaskTitle} đã được thêm vào.`);
+        toast.success(`Task ${newTaskTitle} has been added.`);
         handleNewTaskAdded();
       } catch (error) {
-        console.error("Lỗi xảy ra khi thêm task.", error);
-        toast.error("Lỗi xảy ra khi thêm nhiệm vụ mới.");
+        console.error("Error occurred while adding task.", error);
+        toast.error("Error occurred while adding new task.");
       }
 
       setNewTaskTitle("");
     } else {
-      toast.error("Bạn cần nhập nội dung của nhiệm vụ.");
+      toast.error("You need to enter the content of the task.");
     }
   };
 
@@ -36,7 +36,7 @@ const AddTask = ({ handleNewTaskAdded }) => {
       <div className="flex flex-col gap-3 sm:flex-row">
         <Input
           type="text"
-          placeholder="Cần phải làm gì?"
+          placeholder="what needs to be done?"
           className="h-12 text-base bg-slate-50 sm:flex-1 border-border/50 focus:border-primary/50 focus:ring-primary/20"
           value={newTaskTitle}
           onChange={(even) => setNewTaskTitle(even.target.value)}
@@ -51,7 +51,7 @@ const AddTask = ({ handleNewTaskAdded }) => {
           disabled={!newTaskTitle.trim()}
         >
           <Plus className="size-5" />
-          Thêm
+          Add
         </Button>
       </div>
     </Card>
